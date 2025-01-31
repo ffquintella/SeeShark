@@ -9,7 +9,6 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using FFmpeg.AutoGen;
 using FFmpeg.AutoGen.Native;
-using FFmpeg.Loader;
 using LF = SeeShark.FFmpeg.LibraryFlags;
 //using LibraryLoader = FFmpeg.AutoGen.Native.LibraryLoader;
 
@@ -17,7 +16,7 @@ using LF = SeeShark.FFmpeg.LibraryFlags;
 
 namespace SeeShark.FFmpeg;
 
-public static class FFmpegManager
+public static class FFmpegManager_old
 {
     public static bool IsFFmpegSetup { get; private set; } = false;
     public static bool LogLibrarySearch { get; set; } = true; // Enable logging
@@ -58,26 +57,14 @@ public static class FFmpegManager
             $"\n  - avcodec (v{ffmpeg.LIBAVCODEC_VERSION_MAJOR})" +
             $"\n  - avdevice (v{ffmpeg.LIBAVDEVICE_VERSION_MAJOR})" +
             $"\n  - avformat (v{ffmpeg.LIBAVFORMAT_VERSION_MAJOR})" +
-            $"\n  - avutil (v{ffmpeg.LIBAVUTIL_VERSION_MAJOR})" +
             $"\n  - swscale (v{ffmpeg.LIBSWSCALE_VERSION_MAJOR})");
 
-        var requiredLibs = LF.AVCodec | LF.AVDevice | LF.AVFormat | LF.SWScale | LF.AVUtil ;
+        var requiredLibs = LF.AVCodec | LF.AVDevice | LF.AVFormat | LF.SWScale;
 
-        FFmpegLoader
-            .SearchApplication()
-            .ThenSearchEnvironmentPaths("FFMPEG_PATH")
-            .ThenSearchSystem()
-            .ThenSearchPaths(paths)
-            .Load();
-
-
-        /*
         if (paths.Length == 0)
             TrySetRootPath(requiredLibs, AppDomain.CurrentDomain.BaseDirectory);
         else
             TrySetRootPath(requiredLibs, paths);
-        */
-
         SetupFFmpegLogging(logLevel, logColor);
         ffmpeg.avdevice_register_all();
 

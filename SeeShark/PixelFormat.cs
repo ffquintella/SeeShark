@@ -664,7 +664,7 @@ public enum PixelFormat : int
     /// <summary>
     /// XVideo Motion Acceleration via common packet passing
     /// </summary>
-    Xvmc = AVPixelFormat.AV_PIX_FMT_XVMC,
+    //Xvmc = AVPixelFormat.AV_PIX_FMT_XVMC,
     /// <summary>
     /// planar YUV 4:4:0,20bpp, (1 Cr &#38; Cb sample per 1x2 Y samples), little-endian
     /// </summary>

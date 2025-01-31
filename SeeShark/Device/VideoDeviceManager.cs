@@ -22,6 +22,7 @@ public abstract unsafe class VideoDeviceManager<TDeviceInfo, T> : Disposable
     where TDeviceInfo : VideoDeviceInfo, new()
 {
     protected readonly AVInputFormat* AvInputFormat;
+    protected readonly AVFormatContext* AvFormatContext;
     protected Timer DeviceWatcher;
 
     /// <summary>
@@ -55,6 +56,14 @@ public abstract unsafe class VideoDeviceManager<TDeviceInfo, T> : Disposable
 
         InputFormat = inputFormat;
         AvInputFormat = ffmpeg.av_find_input_format(InputFormat.ToString());
+
+        AvFormatContext = ffmpeg.avformat_alloc_context();
+        if (AvFormatContext == null)
+            throw new InvalidOperationException("Failed to allocate AVFormatContext.");
+
+        AvFormatContext->iformat = AvInputFormat;
+        AvFormatContext->flags |= ffmpeg.AVFMT_FLAG_NOBUFFER;
+
 
         SyncDevices();
         DeviceWatcher = new Timer(
@@ -92,7 +101,10 @@ public abstract unsafe class VideoDeviceManager<TDeviceInfo, T> : Disposable
     protected virtual TDeviceInfo[] EnumerateDevices()
     {
         AVDeviceInfoList* avDeviceInfoList = null;
+
         ffmpeg.avdevice_list_input_sources(AvInputFormat, null, null, &avDeviceInfoList).ThrowExceptionIfError();
+        //ffmpeg.avdevice_list_devices(AvFormatContext, &avDeviceInfoList).ThrowExceptionIfError();
+
         int nDevices = avDeviceInfoList->nb_devices;
         AVDeviceInfo** avDevices = avDeviceInfoList->devices;
 
