@@ -3,11 +3,12 @@
   <PropertyGroup Label="Project">
     <AssemtlyTitle>SeeShark</AssemtlyTitle>
     <AssemblyName>SeeShark</AssemblyName>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <OutputType>Library</OutputType>
     <ImplicitUsings>disable</ImplicitUsings>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Nullable>enable</Nullable>
+    <LangVersion>13</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Label="Nuget">

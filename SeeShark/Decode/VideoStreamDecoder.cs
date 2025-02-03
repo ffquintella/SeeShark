@@ -55,7 +55,14 @@ public unsafe class VideoStreamDecoder : Disposable
                 ffmpeg.av_dict_set(&dict, pair.Key, pair.Value, 0);
         }
 
-        int openInputErr = ffmpeg.avformat_open_input(&formatContext, url, inputFormat, &dict);
+        AVInputFormat *ifmt = ffmpeg.av_find_input_format("avfoundation");
+        var pFormatCtx = ffmpeg.avformat_alloc_context();
+
+        int openInputErr = ffmpeg.avformat_open_input(&pFormatCtx, "0", ifmt, null);
+
+        //int openInputErr = ffmpeg.avformat_open_input(&formatContext, url, inputFormat, &dict);
+
+
         ffmpeg.av_dict_free(&dict);
         openInputErr.ThrowExceptionIfError();
         isFormatContextOpen = true;

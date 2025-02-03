@@ -63,6 +63,8 @@ public static class FFmpegManager
 
         var requiredLibs = LF.AVCodec | LF.AVDevice | LF.AVFormat | LF.SWScale | LF.AVUtil ;
 
+        //ffmpeg.RootPath = paths[0];
+
         FFmpegLoader
             .SearchApplication()
             .ThenSearchEnvironmentPaths("FFMPEG_PATH")
