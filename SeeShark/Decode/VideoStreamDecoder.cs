@@ -101,6 +101,10 @@ public unsafe class VideoStreamDecoder : Disposable
         do
         {
             #region Read frame
+
+            // We need to sleep for a bit to avoid high CPU usage
+            //Thread.Sleep(1);
+
             // Manually wait for a new frame instead of letting it block
             ffmpeg.av_packet_unref(Packet);
             error = ffmpeg.av_read_frame(FormatContext, Packet);

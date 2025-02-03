@@ -84,8 +84,12 @@ public class VideoDevice : Disposable
         // See https://github.com/vignetteapp/SeeShark/issues/29
 
         // (RIP big brain move to avoid overloading the CPU...)
-        if (status == DecodeStatus.NoFrameAvailable)
-            Thread.Sleep(1000 * decoder.Framerate.den / (decoder.Framerate.num * 4));
+
+        if(decoder.Framerate.den == 0 || decoder.Framerate.num == 0)
+            Thread.Sleep(1000 / 4);
+        else
+            if (status == DecodeStatus.NoFrameAvailable)
+                Thread.Sleep(1000 * decoder.Framerate.den / (decoder.Framerate.num * 4));
 
         return status;
     }
