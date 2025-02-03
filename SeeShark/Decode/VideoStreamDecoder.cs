@@ -57,9 +57,11 @@ public unsafe class VideoStreamDecoder : Disposable
         }
 
         // We are defining these defaulst for now
+        /*
         ffmpeg.av_dict_set(&dict, "video_size", "640x480", 0);
         ffmpeg.av_dict_set(&dict, "framerate", "20", 0);
         ffmpeg.av_dict_set(&dict, "pixel_format", "rgb24", 0);
+        */
 
         /*AVInputFormat *ifmt = ffmpeg.av_find_input_format("avfoundation");
         var pFormatCtx = ffmpeg.avformat_alloc_context();
