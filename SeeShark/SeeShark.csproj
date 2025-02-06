@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Project">
+    <AssemtlyTitle>SeeShark</AssemtlyTitle>
+    <AssemblyName>SeeShark</AssemblyName>
+    <TargetFramework>net8.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Nuget">
+    <PackageId>SeeShark</PackageId>
+    <Version>5.0.0</Version>
+    <Authors>Speykious</Authors>
+    <PackageTags>Camera;Webcam;Stream;</PackageTags>
+    <Title>SeeShark</Title>
+    <Description>Simple Camera library</Description>
+    <Copyright>2022 Speykious</Copyright>
+    <PackageProjectUrl>https://github.com/Speykious/SeeShark</PackageProjectUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReadmeFile>Readme.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup Label="Package References">
+  </ItemGroup>
+
+  <ItemGroup Label="Documents">
+    <None Include="..\Readme.md" Pack="true" PackagePath="" />
+    <None Include="..\LICENSE" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+</Project>
